@@ -9,8 +9,11 @@ import TrackingDetails from './pages/TrackingDetails';
 import DeliveryConfirmation from './pages/DeliveryConfirmation';
 import AdminDashboard from './pages/AdminDashboard';
 import StaffDashboard from './pages/StaffDashboard';
+import AgentLogin from './pages/AgentLogin';
+import AgentDashboard from './pages/AgentDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import MainLayout from './components/MainLayout';
+import AIDeliveryPrediction from './pages/AIDeliveryPrediction';
 
 const router = createBrowserRouter([
     {
@@ -31,23 +34,51 @@ const router = createBrowserRouter([
             },
             {
                 path: 'book',
-                element: <BookParcel />,
+                element: (
+                    <ProtectedRoute>
+                        <BookParcel />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: 'identify', // Providing alias for book parcel if needed
-                element: <BookParcel />,
+                element: (
+                    <ProtectedRoute>
+                        <BookParcel />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: 'post-office-result',
-                element: <PostOfficeResult />,
+                element: (
+                    <ProtectedRoute>
+                        <PostOfficeResult />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: 'track',
-                element: <TrackingInput />,
+                element: (
+                    <ProtectedRoute>
+                        <TrackingInput />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: 'track/:id',
-                element: <TrackingDetails />,
+                element: (
+                    <ProtectedRoute>
+                        <TrackingDetails />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: 'prediction',
+                element: (
+                    <ProtectedRoute>
+                        <AIDeliveryPrediction />
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: 'confirm-delivery',
@@ -66,6 +97,18 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute allowedRoles={['staff']}>
                         <StaffDashboard />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: 'agent/login',
+                element: <AgentLogin />,
+            },
+            {
+                path: 'agent/dashboard',
+                element: (
+                    <ProtectedRoute allowedRoles={['agent']}>
+                        <AgentDashboard />
                     </ProtectedRoute>
                 ),
             },
