@@ -16,8 +16,8 @@ export default function Login() {
         if (email && password) {
             if (password.length >= 6) {
                 // Store user session (dummy)
-                localStorage.setItem('isAuthenticated', 'true');
-                localStorage.setItem('userEmail', email);
+                localStorage.setItem('token', 'dummy-jwt-token');
+                localStorage.setItem('user', JSON.stringify({ email }));
                 navigate('/roles');
             } else {
                 setError('Password must be at least 6 characters');

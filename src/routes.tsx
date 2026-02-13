@@ -10,58 +10,73 @@ import DeliveryConfirmation from './pages/DeliveryConfirmation';
 import AdminDashboard from './pages/AdminDashboard';
 import StaffDashboard from './pages/StaffDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
+import MainLayout from './components/MainLayout';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Home />,
+        element: <MainLayout />,
+        children: [
+            {
+                index: true,
+                element: <Home />,
+            },
+            {
+                path: 'login',
+                element: <Login />,
+            },
+            {
+                path: 'roles',
+                element: <RoleSelect />,
+            },
+            {
+                path: 'book',
+                element: <BookParcel />,
+            },
+            {
+                path: 'identify', // Providing alias for book parcel if needed
+                element: <BookParcel />,
+            },
+            {
+                path: 'post-office-result',
+                element: <PostOfficeResult />,
+            },
+            {
+                path: 'track',
+                element: <TrackingInput />,
+            },
+            {
+                path: 'track/:id',
+                element: <TrackingDetails />,
+            },
+            {
+                path: 'confirm-delivery',
+                element: <DeliveryConfirmation />,
+            },
+            {
+                path: 'admin',
+                element: (
+                    <ProtectedRoute allowedRoles={['admin']}>
+                        <AdminDashboard />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: 'staff',
+                element: (
+                    <ProtectedRoute allowedRoles={['staff']}>
+                        <StaffDashboard />
+                    </ProtectedRoute>
+                ),
+            },
+        ],
     },
-    {
-        path: '/login',
-        element: <Login />,
-    },
-    {
-        path: '/roles',
-        element: <RoleSelect />,
-    },
-    {
-        path: '/book',
-        element: <BookParcel />,
-    },
-    {
-        path: '/post-office-result',
-        element: <PostOfficeResult />,
-    },
-    {
-        path: '/track',
-        element: <TrackingInput />,
-    },
-    {
-        path: '/track/:id',
-        element: <TrackingDetails />,
-    },
-    {
-        path: '/confirm-delivery',
-        element: <DeliveryConfirmation />,
-    },
-    {
-        path: '/admin',
-        element: (
-            <ProtectedRoute allowedRoles={['admin']}>
-                <AdminDashboard />
-            </ProtectedRoute>
-        ),
-    },
-    {
-        path: '/staff',
-        element: (
-            <ProtectedRoute allowedRoles={['staff']}>
-                <StaffDashboard />
-            </ProtectedRoute>
-        ),
-    },
-]);
+], {
+    future: {
+        v7_startTransition: true,
+    }
+} as any);
 
-export default function Routes() {
+export default function AppRouter() {
     return <RouterProvider router={router} />;
 }

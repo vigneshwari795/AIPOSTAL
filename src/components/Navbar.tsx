@@ -37,7 +37,7 @@ function Navbar() {
                 Track Parcel
               </Link>
               <Link
-                to="/dashboard"
+                to="/roles"
                 className="text-gray-300 hover:text-[#F63049] transition-colors duration-200 font-medium"
               >
                 Dashboard
@@ -52,7 +52,7 @@ function Navbar() {
               >
                 Login
               </Link>
-              
+
               {/* Mobile Menu Button */}
               <button className="md:hidden text-gray-300 hover:text-[#F63049] focus:outline-none">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -83,7 +83,7 @@ function Navbar() {
               Track Parcel
             </Link>
             <Link
-              to="/dashboard"
+              to="/roles"
               className="block text-gray-300 hover:text-[#F63049] hover:bg-[#8A244B] hover:bg-opacity-20 px-3 py-2 rounded-md transition-colors duration-200"
             >
               Dashboard
@@ -91,10 +91,6 @@ function Navbar() {
           </div>
         </div>
       </nav>
-
-      <style jsx>{`
-        /* Tailwind CSS classes are used inline above */
-      `}</style>
     </>
   );
 }
